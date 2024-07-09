@@ -175,7 +175,3 @@ make
 
 debuild -b -uc -us
 ```
-
-## Authorship / Commission
-
-This project was commissioned by the LONdon Access Point (LONAP) internet exchange 
