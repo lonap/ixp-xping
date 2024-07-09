@@ -1,0 +1,21 @@
+Source: ixp-xping
+Maintainer: Ben Cartwright-Cox <ben@benjojo.co.uk>
+Uploaders: Ben Cartwright-Cox <ben@benjojo.co.uk>,
+Section: net
+Testsuite: autopkgtest-pkg-go
+Priority: optional
+Build-Depends: debhelper-compat (= 9),
+               dh-golang,
+Standards-Version: 4.4.1
+XS-Go-Import-Path: github.com/benjojo/ixp-xping
+
+Package: ixp-xping
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
+Depends: adduser,
+         daemon | systemd-sysv,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Built-Using: ${misc:Built-Using},
+Description: Internet Exchane Point fabric monitoring tool
+    A program that is designed for Internet Exchange Points to monitor their quality of packet loss and latency in a way that is aware of modern overlay fabrics and ECMP. Meaning it can detect IXP Backhaul link aggregation failures much more reliably than more basic tools

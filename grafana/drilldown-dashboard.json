@@ -1,0 +1,434 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 3,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "c3fe60c1-dfc2-4a6a-8635-d698d4537f92"
+        },
+        "description": "",
+        "gridPos": {
+          "h": 3,
+          "w": 5,
+          "x": 0,
+          "y": 0
+        },
+        "id": 3,
+        "options": {
+          "code": {
+            "language": "plaintext",
+            "showLineNumbers": false,
+            "showMiniMap": false
+          },
+          "content": "${targetpeer}\n===",
+          "mode": "markdown"
+        },
+        "pluginVersion": "10.3.3",
+        "title": "From",
+        "type": "text"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "c3fe60c1-dfc2-4a6a-8635-d698d4537f92"
+        },
+        "description": "",
+        "gridPos": {
+          "h": 3,
+          "w": 5,
+          "x": 5,
+          "y": 0
+        },
+        "id": 4,
+        "options": {
+          "code": {
+            "language": "plaintext",
+            "showLineNumbers": false,
+            "showMiniMap": false
+          },
+          "content": "${sourcepeer}\n===\n",
+          "mode": "markdown"
+        },
+        "pluginVersion": "10.3.3",
+        "title": "To",
+        "type": "text"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "c3fe60c1-dfc2-4a6a-8635-d698d4537f92"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 0.1
+                }
+              ]
+            },
+            "unit": "percentunit",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 4,
+          "x": 10,
+          "y": 0
+        },
+        "id": 5,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "max"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {
+            "titleSize": 10,
+            "valueSize": 64
+          },
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.3.3",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "c3fe60c1-dfc2-4a6a-8635-d698d4537f92"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "max by(peer) (xping_peer_loss_per_flow{local=\"$sourcepeer\", peer=\"$targetpeer\"})",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Worst Loss",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "c3fe60c1-dfc2-4a6a-8635-d698d4537f92"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 1,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "µs",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 24,
+          "x": 0,
+          "y": 3
+        },
+        "id": 1,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "c3fe60c1-dfc2-4a6a-8635-d698d4537f92"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "xping_peer_latency_per_flow{peer=\"$targetpeer\", local=\"$sourcepeer\"}",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{peer}} - {{port}}",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Per Flow Latency from $targetpeer to $sourcepeer",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "c3fe60c1-dfc2-4a6a-8635-d698d4537f92"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 5,
+              "pointSize": 1,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "max": 1,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percentunit",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 13,
+          "w": 24,
+          "x": 0,
+          "y": 12
+        },
+        "id": 2,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "c3fe60c1-dfc2-4a6a-8635-d698d4537f92"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "xping_peer_loss_per_flow{peer=\"$targetpeer\", local=\"$sourcepeer\"}",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{peer}} - {{port}}",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Per Flow Loss from $targetpeer to $sourcepeer",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 39,
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": false,
+            "text": "hex-cr1",
+            "value": "hex-cr1"
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "c3fe60c1-dfc2-4a6a-8635-d698d4537f92"
+          },
+          "definition": "label_values(xping_peer_latency_per_flow,peer)",
+          "hide": 0,
+          "includeAll": false,
+          "label": "Target",
+          "multi": false,
+          "name": "targetpeer",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(xping_peer_latency_per_flow,peer)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": false,
+            "text": "eqs-cr1",
+            "value": "eqs-cr1"
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "c3fe60c1-dfc2-4a6a-8635-d698d4537f92"
+          },
+          "definition": "label_values(xping_peer_latency_per_flow,local)",
+          "hide": 0,
+          "includeAll": false,
+          "label": "Source",
+          "multi": false,
+          "name": "sourcepeer",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(xping_peer_latency_per_flow,local)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "XPING - LONAP",
+    "uid": "b21abb2e-8132-4567-88bb-e8a487bf1702",
+    "version": 1,
+    "weekStart": ""
+  }

@@ -1,0 +1,13 @@
+[Unit]
+Description=IXP Flow loss performance monitor
+
+[Service]
+Restart=always
+User=root
+ExecStart=/usr/bin/ixp-xping
+ExecReload=/bin/kill -HUP $MAINPID
+TimeoutStopSec=20s
+LimitNOFILE=8192
+
+[Install]
+WantedBy=multi-user.target

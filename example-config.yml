@@ -1,0 +1,9 @@
+listenhost: 0.0.0.0
+listenportstart: 32736
+pollratems: 250
+peers:
+- 192.168.122.119
+- 192.168.122.96
+allowedcidrs:
+- 192.168.0.0/16
+prometheusport: 9150

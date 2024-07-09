@@ -1,0 +1,8 @@
+ixp-xping
+.gopath
+build/
+debian/files
+debian/ixp-xping.debhelper.log
+debian/ixp-xping.substvars
+tmp
+*.sh
