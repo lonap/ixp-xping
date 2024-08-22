@@ -412,7 +412,7 @@ func init() {
 var metricTotalLoss = prometheus.NewGaugeVec(
 	prometheus.GaugeOpts{
 		Name: "xping_peer_loss_total",
-		Help: "sliding window packetloss on {local,peer} L3 pair",
+		Help: "aaa",
 	},
 	[]string{"local", "peer"},
 )
@@ -420,7 +420,7 @@ var metricTotalLoss = prometheus.NewGaugeVec(
 var metricFlowLoss = prometheus.NewGaugeVec(
 	prometheus.GaugeOpts{
 		Name: "xping_peer_loss_per_flow",
-		Help: "sliding window packetloss on {local,peer,peerport} L4 flow",
+		Help: "aaa",
 	},
 	[]string{"local", "peer", "port"},
 )
@@ -428,7 +428,7 @@ var metricFlowLoss = prometheus.NewGaugeVec(
 var metricFlowLatency = prometheus.NewGaugeVec(
 	prometheus.GaugeOpts{
 		Name: "xping_peer_latency_per_flow",
-		Help: "sliding window round-trip latency on {local,peer,peerport} L4 flow, in usec",
+		Help: "aaa",
 	},
 	[]string{"local", "peer", "port"},
 )
