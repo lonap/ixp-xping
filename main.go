@@ -403,24 +403,15 @@ func startUDPProbeReplier(l *net.UDPConn) {
 }
 
 func init() {
-	prometheus.MustRegister(metricTotalLoss)
 	prometheus.MustRegister(metricFlowLoss)
 	prometheus.MustRegister(metricFlowLatency)
 	prometheus.MustRegister(metricBadPackets)
 }
 
-var metricTotalLoss = prometheus.NewGaugeVec(
-	prometheus.GaugeOpts{
-		Name: "xping_peer_loss_total",
-		Help: "aaa",
-	},
-	[]string{"local", "peer"},
-)
-
 var metricFlowLoss = prometheus.NewGaugeVec(
 	prometheus.GaugeOpts{
 		Name: "xping_peer_loss_per_flow",
-		Help: "aaa",
+		Help: "sliding window fraction of packetloss on {local,peer,peerport} L4 flow",
 	},
 	[]string{"local", "peer", "port"},
 )
@@ -428,7 +419,7 @@ var metricFlowLoss = prometheus.NewGaugeVec(
 var metricFlowLatency = prometheus.NewGaugeVec(
 	prometheus.GaugeOpts{
 		Name: "xping_peer_latency_per_flow",
-		Help: "aaa",
+		Help: "sliding window round-trip latency on {local,peer,peerport} L4 flow, in usec",
 	},
 	[]string{"local", "peer", "port"},
 )
@@ -436,7 +427,7 @@ var metricFlowLatency = prometheus.NewGaugeVec(
 var metricBadPackets = prometheus.NewGaugeVec(
 	prometheus.GaugeOpts{
 		Name: "xping_bad_packets",
-		Help: "aaa",
+		Help: "invalid ixp-xping packets received",
 	},
 	[]string{"reason"},
 )
