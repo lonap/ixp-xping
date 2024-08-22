@@ -19,10 +19,6 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
-var (
-	configFileLocation = flag.String("cfg.path", "/etc/ixp-xping.yaml", "Where to find the YAML config")
-)
-
 var runtimeConfig *configfile.XPingConfig
 var bufferPool = bpool.NewBytePool(512, 10000)
 
@@ -35,6 +31,14 @@ func main() {
 		AllowedCIDRs:    []string{},
 		PrometheusPort:  9150,
 	}
+
+	// Program Flags
+	configFileLocation := flag.String("cfg.path", "/etc/ixp-xping.yaml", "Where to find the YAML config")
+	lowerListenPort := flag.Int("probe.lower.port", int(config.ListenPortStart),
+		"The port number to start 16 UDP listeners from. The next 16 ports from the number provided should be free")
+	listenHost := flag.String("probe.listen", config.ListenHost, "The IP to listen on for probes")
+	flag.Parse()
+
 	f, err := os.Open(*configFileLocation)
 	if err == nil {
 		c, err := configfile.Parse(f)
@@ -46,11 +50,6 @@ func main() {
 	} else {
 		log.Printf("did not find a config file in %v", *configFileLocation)
 	}
-
-	lowerListenPort := flag.Int("probe.lower.port", int(config.ListenPortStart),
-		"The port number to start 16 UDP listeners from. The next 16 ports from the number provided should be free")
-	listenHost := flag.String("probe.listen", config.ListenHost, "The IP to listen on for probes")
-	flag.Parse()
 
 	config.LONAPAutoConfig()
 
@@ -413,7 +412,7 @@ func init() {
 var metricTotalLoss = prometheus.NewGaugeVec(
 	prometheus.GaugeOpts{
 		Name: "xping_peer_loss_total",
-		Help: "aaa",
+		Help: "sliding window packetloss on {local,peer} L3 pair",
 	},
 	[]string{"local", "peer"},
 )
@@ -421,7 +420,7 @@ var metricTotalLoss = prometheus.NewGaugeVec(
 var metricFlowLoss = prometheus.NewGaugeVec(
 	prometheus.GaugeOpts{
 		Name: "xping_peer_loss_per_flow",
-		Help: "aaa",
+		Help: "sliding window packetloss on {local,peer,peerport} L4 flow",
 	},
 	[]string{"local", "peer", "port"},
 )
@@ -429,7 +428,7 @@ var metricFlowLoss = prometheus.NewGaugeVec(
 var metricFlowLatency = prometheus.NewGaugeVec(
 	prometheus.GaugeOpts{
 		Name: "xping_peer_latency_per_flow",
-		Help: "aaa",
+		Help: "sliding window round-trip latency on {local,peer,peerport} L4 flow, in usec",
 	},
 	[]string{"local", "peer", "port"},
 )
@@ -437,7 +436,7 @@ var metricFlowLatency = prometheus.NewGaugeVec(
 var metricBadPackets = prometheus.NewGaugeVec(
 	prometheus.GaugeOpts{
 		Name: "xping_bad_packets",
-		Help: "aaa",
+		Help: "invalid ixp-xping packets received",
 	},
 	[]string{"reason"},
 )
