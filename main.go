@@ -436,7 +436,7 @@ var metricFlowLatency = prometheus.NewGaugeVec(
 var metricBadPackets = prometheus.NewGaugeVec(
 	prometheus.GaugeOpts{
 		Name: "xping_bad_packets",
-		Help: "invalid ixp-xping packets received",
+		Help: "aaa",
 	},
 	[]string{"reason"},
 )
