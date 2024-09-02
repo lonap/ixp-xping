@@ -1,3 +1,10 @@
+ixp-xping (0.2) unstable; urgency=medium
+
+  * Better Prometheus metrics
+  * Fixed configuration file location flag being ignored
+
+ -- Ben Cartwright-Cox <ben@benjojo.co.uk>  Mon, 2 Sep 2024 14:42:46 +0000
+
 ixp-xping (0.1) unstable; urgency=medium
 
   * Initial release.
