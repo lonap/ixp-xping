@@ -83,10 +83,12 @@ var lonapAutoConfigPath = flag.String(
 	"Where to look for a LONAP style auto configuration file")
 
 func (XPC *XPingConfig) LONAPAutoConfig() {
-	XPC.PeersNames = make(map[string]string)
 	lonapf, err := os.Open(*lonapAutoConfigPath)
 	if err == nil {
 		defer lonapf.Close()
+
+		// Null out any existing PeersNames map
+		XPC.PeersNames = make(map[string]string)
 
 		// Roll the peers into a map so we can avoid dupes
 		PeerMap := make(map[string]bool)
